@@ -2,7 +2,12 @@ import requests
 
 def create_entitie(url, data, params):
     try:
-        headers = {'content-type': 'application/ld+json'}
+        #headers = {'content-type': 'application/ld+json'}
+        headers = {
+            'Content-Type': 'application/json',
+            'Link': '<https://fiware.github.io/data-models/context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"',
+            'Accept': 'application/json'
+        }
         response = requests.post(url, json=data, headers=headers, params=params)
         return response.status_code, response.text
     except requests.exceptions.RequestException as e:

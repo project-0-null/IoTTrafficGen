@@ -35,7 +35,7 @@ class ArtificialSensor(BaseSensor):
             ]
         }
 
-    def update_people_count(self):
+    def update_peopleCount(self):
         data ={
             "type": "Property",
             "value": random.randint(0, 500)  # Simulate a random people count

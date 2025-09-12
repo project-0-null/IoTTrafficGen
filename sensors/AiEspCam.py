@@ -10,15 +10,15 @@ class AiEspCam(BaseSensor):
     def __init__(self, sensor_id, sensor_location):
         super().__init__(sensor_id, "AI ESP Cam", sensor_location)
 
-    def new_sensor(self, sensor_id):
+    def new_sensor(self):
         return {
-            "id": "urn:ngsi-ld:AiEspCam:" + sensor_id,
+            "id": "urn:ngsi-ld:AiEspCam:" + self.sensor_id,
             "type": "AiEspCam",
             "name": {
                 "type": "Property",
                 "value": "Presence Sensor"
             },
-            "people_count": {
+            "peopleCount": {
                 "type": "Property",
                 "value": 0
             },
@@ -35,11 +35,11 @@ class AiEspCam(BaseSensor):
             }
         }
 
-    def update_people_count(self, people_count):
+    def update_peopleCount(self, peopleCount):
         data = {
-            "people_count": {
+            "peopleCount": {
             "type": "Property",
-            "value": people_count
+            "value": peopleCount
             }
         }
         return data
@@ -59,8 +59,8 @@ class AiEspCam(BaseSensor):
         
         results = model(frame, stream=True)  # YOLO inference
 
-        people_count = sum(1 for result in results for class_id in result.boxes.cls if int(class_id) == 0)  # Classe 0 é "person" no COCO
-        return people_count
+        peopleCount = sum(1 for result in results for class_id in result.boxes.cls if int(class_id) == 0)  # Classe 0 é "person" no COCO
+        return peopleCount
             
 
         cap.release()
