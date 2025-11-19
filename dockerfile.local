@@ -1,0 +1,27 @@
+FROM python:3.10-slim-bullseye
+
+# As dependências do OpenCV (libgl1) são as mesmas
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        build-essential \
+        git \
+        libgl1-mesa-glx \
+        libsm6 \
+        libxext6 \
+        libxrender1 && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+COPY requirements.txt .
+
+# Definir esta variável é uma boa prática para logs do Python
+ENV PYTHONUNBUFFERED 1
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copiar o resto do código
+COPY . .
+
+# O comando de inicialização é o mesmo
+CMD ["python", "main.py"]

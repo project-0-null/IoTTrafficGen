@@ -1,0 +1,44 @@
+# docker compose para IoT Traffic Generator
+version: '3.8'
+# estabeleçe a versão do docker compose
+
+services:
+# 'services' é o bloco principal. cada 'service' é um container
+
+  IoTTrafficGen:
+  #nome do primeiro serviço
+    build: 
+    context: .
+    docekrfile: dockerfile.local #para teste local
+    #dockerfile: dockerfile  #oficial
+    #o 'build' é "como contruir esse container?"  o ponto é para iditificar que o docker file esta nesse diretório
+
+    image: IoTTrafficGen
+    #(opcional) dando um nome pra imagem que vai ser construida
+
+    #ports:
+    #nao sei oq isso aq muda nao, mas tipo conecta o container a uma porta do seu pc
+
+    environment: 
+    #-CAMERA_STREAM_URL=http://172.16.30.102:81/stream #oficial
+      -CAMERA_STREAM_URL="0" #teste com webcam local
+      -SERVER_URL=http://192.168.0.95:31357/ngsi-ld/v1/entities
+
+    devices:
+      - /dev/video0:/dev/video0 #teste com webcam local
+    #mapeia a camera do meu pc para o container
+
+    volumes:
+      - .:/app
+#aqui definimos quais pastas do meu pc sera espelhadas no container, desas forma nao precisamos recriar o container a cada mudança
+#mapeia a pasta ./meu-codigo para /app/codigo no container
+
+#depends-on
+# - outro_serviço
+#(opcional) caso esse serviço depender de outra define uma ordem de inicialização
+
+#NOME_DE_OUTRO_SERVIÇO:
+#image: postgres:14 ##puxa a img do docker hub
+#enviroment:
+# -POSTGREE_PASSWORD=********  
+
