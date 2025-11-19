@@ -1,34 +1,12 @@
 import time
-from config import SERVER_URL, SENSOR_INTERVAL
+from config import SERVER_URL, SENSOR_INTERVAL, CAMERA_STREAM_URL
 from sensors.ArtificialSensor import ArtificialSensor
 from sensors.AiEspCam import AiEspCam
 from sensors.BaseSensor import BaseSensor
 import http_client
 
 if __name__ == "__main__":
-    """    
-    # Create an instance of the ArtificialSensor class
-    sensor = AiEspCam("1", [-20.272450, -40.306660])
-    data = sensor.new_sensor()
-    status, response = http_client.create_entitie(SERVER_URL, data, None)
-    print()
-    print(f"Sent POST: {data} | Response: {status} - {response}")
-    print()
-
-
-    try:
-        while True:
-            # Simulate the sensor detecting a person
-            data = sensor.update_peopleCount()
-            status, response = http_client.update_attr_value(SERVER_URL, data, sensor.sensor_id, "peopleCount", "ArtificialSensor")
-            print()
-            print(f"Sent UPDATE: {data} | Response: {status} - {response}")
-            print()
-            time.sleep(SENSOR_INTERVAL)
-    except KeyboardInterrupt:
-        print("Stopping sensor updates...")
     
-    """
     sensor_ids = ["ESPCAM1"]
     sensors = []
     for i in range(len(sensor_ids)):
@@ -46,7 +24,8 @@ if __name__ == "__main__":
     previous_peopleCount = 0
     while True:
         for sensor in sensors:
-            current_peopleCount = sensor.detect_person("http://172.16.30.111:81/stream")
+            #current_peopleCount = sensor.detect_person(CAMERA_STREAM_URL)
+            current_peopleCount = sensor.detect_person(0)
             if current_peopleCount != previous_peopleCount:
                 print(current_peopleCount)
                 data = sensor.update_peopleCount(current_peopleCount)

@@ -9,7 +9,7 @@ services:
   #nome do primeiro serviço
     build: 
     context: .
-    docekrfile: dockerfile.local #para teste local
+    dockerfile: dockerfile.local #para teste local
     #dockerfile: dockerfile  #oficial
     #o 'build' é "como contruir esse container?"  o ponto é para iditificar que o docker file esta nesse diretório
 

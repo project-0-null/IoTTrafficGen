@@ -1,67 +1,64 @@
 # ==================================
-# 1. Ambiente Virtual e Python
+# 1. Ambientes Virtuais e Python
 # ==================================
 
-# Ignora pastas de ambiente virtual
+# Pastas de Ambiente Virtual
 .venv
 venv
 env
 
-# Bytecode files
-*.pyc
+# Cache de Compilação do Python
 __pycache__/
-*.pyd
-
-# Arquivos gerados pelo Python
-.python-version
-.pytest_cache/
+*.pyc
 
 # Arquivos de log/depuração
 *.log
+tempCodeRunnerFile.py  # Arquivo temporário comum do VS Code/Code Runner
 
 # ==================================
 # 2. Modelos de Machine Learning (YOLO) e Dados
 # ==================================
 
-# **Crucial para evitar pushes lentos.**
-# Ignora arquivos de modelos YOLO (weights, checkpoint, etc.)
-# O Git não deve rastrear modelos grandes e binários.
-# Você deve armazenar esses modelos em um serviço como AWS S3 (dado que você estudou AWS)
-# ou usar Git LFS, mas o mais simples é ignorar totalmente.
+# Modelos, Pesos e Checkpoints (Não devem ir para o Git)
+# Inclui o yolo11n.pt
 *.weights
 *.pt
 *.onnx
 *.h5
-models/
-yolo_models/
+runs/                  # Pasta comum para logs de treinamento e inferência (YOLO)
 checkpoints/
 
-# Ignora grandes datasets de treinamento e pastas de resultados
-data/
+# Datasets e Resultados Grandes
 datasets/
+data/
 output/
 results/
 
 # ==================================
-# 3. Artefatos de Build e Docker
+# 3. Artefatos de Build, Configurações Locais e Docker
 # ==================================
 
-# Ignora arquivos de compilação ou temporários
-# Se você está usando linguagens como C (embutida no seu projeto), 
-# é bom ignorar o build gerado
+# Pastas de build de projetos C/C++/Embarcados (como .build ou build/)
 build/
 dist/
 
-# Ignora o arquivo que guarda segredos ou variáveis de ambiente local
+# Ignora pastas de credenciais ou variáveis de ambiente local
 .env
+credentials.h
+secrets.h
+
+# Ignora o projeto/pasta amb inteira
+amb/
 
 # ==================================
 # 4. Ferramentas de IDE/Sistema
 # ==================================
 
-# IDEs mais comuns
-.idea/
+# Ignora pastas de configuração do VS Code
 .vscode/
 
 # Arquivos de sistema/macOS
 .DS_Store
+
+# Pasta de sensores
+#sensors/
