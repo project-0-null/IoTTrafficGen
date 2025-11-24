@@ -25,8 +25,7 @@ WORKDIR /app
 COPY requirements.txt .
 
 ENV PYTHONUNBUFFERED 1
-
-# ENV CAMERA_STREAM_URL = "http://172.16.30.102:81/stream" ; nao pode ficar aq
+ENV CAMERA_STREAM_URL = "http://172.16.30.102:81/stream" 
 
 # Instalar as dependências. 
 # ATENÇÃO: OpenCV pode ser complicado em ARM. A flag --trusted-host pode ser necessária.
